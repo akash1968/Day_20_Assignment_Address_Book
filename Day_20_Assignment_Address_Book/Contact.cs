@@ -19,10 +19,7 @@ namespace Day_20_Assignment_Address_Book
         private string zip;
         private string phoneNo;
         private string email;
-
-
-
-        //creating a constructor
+      //creating a constructor
         public Contact(string name, string address, string city, string state, string zip, string phoneNo, string email)
         {
             this.name = name;
@@ -66,6 +63,5 @@ namespace Day_20_Assignment_Address_Book
         {
             return email;
         }
-       
     }
 }

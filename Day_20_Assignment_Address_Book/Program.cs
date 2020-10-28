@@ -147,7 +147,7 @@ namespace Day_20_Assignment_Address_Book
                     addbook.AddAddress(keyname, contact);
                     string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
                     string text = "Name : " + name + "  Address : " + address + "  City : " + city + "  State : " + state + "  zip : " + zip + "  Contact No. : " + contactNo + "  Email ID : " + mailID + "\n";
-
+                    // Updating the text into the file path
                     File.AppendAllText(path, text);
 
                 }
@@ -251,39 +251,27 @@ namespace Day_20_Assignment_Address_Book
                 }
                 else if (choice == 9)
                 {
-
+                    // Checking the file path
                     string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
                     if (File.Exists(path))
                     {
+                        // Storing all the details of the contacts into a list
                         List<Contact> li = addbook.ViewAddressBook(1);
                         foreach (Contact cc in li)
                         {
                             string text = "Name : " + cc.GetName() + "  Address : " + cc.GetAddress() + "  City : " + cc.GetCity() + "  State : " + cc.GetState() + "  zip : " + cc.GetZip() + "  Contact No. : " + cc.GetPhoneNo() + "  Email ID : " + cc.GetEmail() + "\n";
+                            // Writing data into the file
                             File.WriteAllText(path, text);
                         }
-
                     }
-
-
+                    // Reading all text from the file
                     addbook.ReadAllText();
                 }
-                else
+                else        
                 {
-                    string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
-                    if (File.Exists(path))
-                    {
-                        List<Contact> li = addbook.ViewAddressBook(1);
-                        foreach (Contact cc in li)
-                        {
-                            string text = "Name : " + cc.GetName() + "  Address : " + cc.GetAddress() + "  City : " + cc.GetCity() + "  State : " + cc.GetState() + "  zip : " + cc.GetZip() + "  Contact No. : " + cc.GetPhoneNo() + "  Email ID : " + cc.GetEmail() + "\n";
-                            File.WriteAllText(path, text);
-                        }
-
-                    }
                     break;
                 }
             } while (choice != 10);
-
-        }
+       }
     }
 }

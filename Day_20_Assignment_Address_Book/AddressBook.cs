@@ -206,8 +206,7 @@ namespace Day_20_Assignment_Address_Book
             //using for each loop to iterate the list and add state into hashset
             foreach (Contact c in list)
             {
-
-                stateSet.Add(c.GetState());
+               stateSet.Add(c.GetState());
             }
             //iterating the hashset to display contact details with state name
             foreach (string state in stateSet)
@@ -232,12 +231,12 @@ namespace Day_20_Assignment_Address_Book
                 Console.WriteLine();
             }
         }
-
-        internal void ReadAllText()
+        // Method to Read All Text from the file
+       internal void ReadAllText()
         {
             string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
-            string lines;
-            lines = File.ReadAllText(path);
+             // Reading all lines from the file
+           string lines = File.ReadAllText(path);
             Console.WriteLine(lines);
         }
     }
