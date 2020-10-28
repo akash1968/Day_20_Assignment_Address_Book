@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AddressBook.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
@@ -6,9 +6,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
+using System.Text.RegularExpressions;
+using System.Transactions;
+using System.Xml.Serialization;
 
 namespace Day_20_Assignment_Address_Book
 {
@@ -229,6 +231,15 @@ namespace Day_20_Assignment_Address_Book
                }
                 Console.WriteLine();
             }
-        }       
+        }
+
+        internal void ReadAllText()
+        {
+            string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
+            string lines;
+            lines = File.ReadAllText(path);
+            Console.WriteLine(lines);
+      
+        }  
     }
 }

@@ -1,14 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator Name="Akash Kumar Singh"/>
 // --------------------------------------------------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Transactions;
-using System.Xml.Serialization;
 
 namespace Day_20_Assignment_Address_Book
 {
@@ -31,8 +34,9 @@ namespace Day_20_Assignment_Address_Book
                 Console.WriteLine("5.View AddressBook fora key name.");
                 Console.WriteLine("6.Search person by city/state name.");
                 Console.WriteLine("7.View persons by city.");
-                Console.WriteLine("8.View persons by state");           
-                Console.WriteLine("9.Exit.");
+                Console.WriteLine("8.View persons by state");
+                Console.WriteLine("9.Print all contacts from text file.");
+                Console.WriteLine("10.Exit.");
                 choice = Convert.ToInt32(Console.ReadLine());
                 //Checking the choice entered by the user and iterating using for loop
                 if (choice == 1)
@@ -138,10 +142,17 @@ namespace Day_20_Assignment_Address_Book
                         keyname = Console.ReadLine();
                     }
                     //storing all the data entered by the user in the constructor
+
+                    Contact contact = new Contact(name.ToUpper(), address.ToUpper(), city.ToUpper(), state.ToUpper(), zip, contactNo, mailID);
+                    //passing the details into the method AddAddress
+                    addbook.AddAddress(keyname, contact);
+                    string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
+                    string text = "Name : " + name + "  Address : " + address + "  City : " + city + "  State : " + state + "  zip : " + zip + "  Contact No. : " + contactNo + "  Email ID : " + mailID + "\n";
+
+                    File.AppendAllText(path, text);
                     Contact contact = new Contact(name, address, city, state, zip, contactNo, mailID);
                     //passing the details into the method AddAddress
                     addbook.AddAddress(keyname, contact);
-
                 }
                 //second choice iteration of view all contacts
                 else if (choice == 2)
@@ -241,12 +252,39 @@ namespace Day_20_Assignment_Address_Book
                 {
                     addbook.AddressByState();
                 }
+                else if (choice == 9)
+                {
+
+                    string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
+                    if (File.Exists(path))
+                    {
+                        List<Contact> li = addbook.ViewAddressBook(1);
+                        foreach (Contact cc in li)
+                        {
+                            string text = "Name : " + cc.GetName() + "  Address : " + cc.GetAddress() + "  City : " + cc.GetCity() + "  State : " + cc.GetState() + "  zip : " + cc.GetZip() + "  Contact No. : " + cc.GetPhoneNo() + "  Email ID : " + cc.GetEmail() + "\n";
+                            File.WriteAllText(path, text);
+                        }
+
+                    }
+                   addbook.ReadAllText();
+                }
                 else
                 {
+                    string path = @"C:\Users\Lenovo\source\repos\Day_20_Assignment_Address_Book\Hello.txt";
+                    if (File.Exists(path))
+                    {
+                        List<Contact> li = addbook.ViewAddressBook(1);
+                        foreach (Contact cc in li)
+                        {
+                            string text = "Name : " + cc.GetName() + "  Address : " + cc.GetAddress() + "  City : " + cc.GetCity() + "  State : " + cc.GetState() + "  zip : " + cc.GetZip() + "  Contact No. : " + cc.GetPhoneNo() + "  Email ID : " + cc.GetEmail() + "\n";
+                            File.WriteAllText(path, text);
+                        }
+
+                    }
                     break;
                 }
-                //exit
-            } while (choice != 9);
+            } while (choice != 10);
+
         }
     }
 }
