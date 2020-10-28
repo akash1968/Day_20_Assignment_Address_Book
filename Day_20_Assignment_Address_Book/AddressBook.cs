@@ -16,7 +16,7 @@ namespace Day_20_Assignment_Address_Book
     { //creating a new list to store contact details entered by the user
         private List<Contact> list = new List<Contact>();
         //create a dictionary(generic collection) to store keyvalue pair
-        private Dictionary<string, Contact> d = new Dictionary<string, Contact>();
+        private Dictionary<string, Contact> dict = new Dictionary<string, Contact>();
         //create a city dictionary to store city details
         public static Dictionary<string, Contact> cityDictionary = new Dictionary<string, Contact>();
         //create a state dictionary to store state details
@@ -27,39 +27,63 @@ namespace Day_20_Assignment_Address_Book
         }
         public Dictionary<string, Contact> GetDictionary()
         {
-            return d;
+            return dict;
         }
         //method to add address to the list
         public void AddAddress(string kname, Contact c)
         {
             list.Add(c);
-            d.Add(kname, c);
-
+            dict.Add(kname, c);
         }
         //method to view contact details using key name
         public Contact ViewByKeyName(string kname)
         {
             //iterating the keyvalue pair using for each loop
-            foreach (KeyValuePair<string, Contact> kvp in d)
+            foreach (KeyValuePair<string, Contact> kvp in dict)
             {
                 if (kvp.Key == kname)
                     return kvp.Value;
             }
             return null;
         }
-        public List<Contact> ViewAddressBook()
+        public List<Contact> ViewAddressBook(int input)
         {
+            // Sorting by name
+            if (input == 1)
+            {
+                list = list.OrderBy(c => c.GetName()).ToList();
+            }
+            // Sorting by City
+            else if (input == 2)
+            {
+
+                list = list.OrderBy(c => c.GetCity()).ToList();
+            }
+            // Sorting by State
+            else if (input == 3)
+            {
+                list = list.OrderBy(c => c.GetState()).ToList();
+            }
+            // Sorting by Zip
+            else
+            {
+                list = list.OrderBy(c => c.GetZip()).ToList();
+            }
+            // Returning the sorted list
             return list;
         }
         //method to edit the contact details
         public void EditNumber(string ename, string newnumber)
         {
             Boolean flag = false;
+            // Iterating along the contact list to get each value
             foreach (Contact cc in list)
             {
+                // Checking if the entered name matches the name in the record
                 if (cc.GetName().Equals(ename))
                 {
                     flag = true;
+                    // updating the new number
                     cc.SetPhoneNo(newnumber);
                     Console.WriteLine("Number edited successfully");
                     break;
@@ -69,18 +93,19 @@ namespace Day_20_Assignment_Address_Book
             {
                 Console.WriteLine("No such name found!!!");
             }
-
-
-        }
+       }
         //method to delete the contact from the phonebook
         public void RemoveContact(string rname)
         {
             Boolean flag = false;
+            // Iterating along the contact list to get each value
             foreach (Contact cc in list)
             {
+                // Checking if the entered name matches the name in the record
                 if (cc.GetName().Equals(rname))
                 {
                     flag = true;
+                    // Removing the contact from the list
                     list.Remove(cc);
                     Console.WriteLine("Number removed successfully");
                     break;
@@ -161,7 +186,7 @@ namespace Day_20_Assignment_Address_Book
                     }
                }
                 // Displaying the count of contacts with similar city
-                Console.WriteLine("There are " + count + " contacts with address " + city);
+                Console.WriteLine("There are " + count + " contacts with city " + city);
                 Console.WriteLine();
                 foreach(Contact cc in list)
                 {
@@ -195,7 +220,7 @@ namespace Day_20_Assignment_Address_Book
                     }
                 }
                 // Displaying the count of contacts with similar state
-                Console.WriteLine("There are " + count + " contacts with address " + state);
+                Console.WriteLine("There are " + count + " contacts with state " + state);
                 Console.WriteLine();
                 foreach (Contact cc in list)
                 {
@@ -204,14 +229,6 @@ namespace Day_20_Assignment_Address_Book
                }
                 Console.WriteLine();
             }
-
-        }
-        // UC_11_Ability to sort the entries in the address book alphabetically by Person's name
-        public void SortByName()
-        {
-            // sorting the list using Lambda Expression
-            list = list.OrderBy(c => c.GetName()).ToList();
-
-        }
+        }       
     }
 }
