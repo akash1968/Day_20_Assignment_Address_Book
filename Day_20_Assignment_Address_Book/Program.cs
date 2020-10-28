@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
@@ -142,6 +142,7 @@ namespace Day_20_Assignment_Address_Book
                         keyname = Console.ReadLine();
                     }
                     //storing all the data entered by the user in the constructor
+
                     Contact contact = new Contact(name.ToUpper(), address.ToUpper(), city.ToUpper(), state.ToUpper(), zip, contactNo, mailID);
                     //passing the details into the method AddAddress
                     addbook.AddAddress(keyname, contact);
@@ -149,7 +150,9 @@ namespace Day_20_Assignment_Address_Book
                     string text = "Name : " + name + "  Address : " + address + "  City : " + city + "  State : " + state + "  zip : " + zip + "  Contact No. : " + contactNo + "  Email ID : " + mailID + "\n";
 
                     File.AppendAllText(path, text);
-
+                    Contact contact = new Contact(name, address, city, state, zip, contactNo, mailID);
+                    //passing the details into the method AddAddress
+                    addbook.AddAddress(keyname, contact);
                 }
                 //second choice iteration of view all contacts
                 else if (choice == 2)
@@ -263,9 +266,7 @@ namespace Day_20_Assignment_Address_Book
                         }
 
                     }
-
-
-                    addbook.ReadAllText();
+                   addbook.ReadAllText();
                 }
                 else
                 {
