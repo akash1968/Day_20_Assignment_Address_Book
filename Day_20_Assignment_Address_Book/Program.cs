@@ -18,7 +18,7 @@ namespace Day_20_Assignment_Address_Book
         {
             int choice = 0;
             //Creating a method of class AddressBook
-            AddressBook ab = new AddressBook();
+            AddressBook addbook = new AddressBook();
             // Using Do-While Loop to iterate the options give to user.
             do
             {
@@ -49,7 +49,7 @@ namespace Day_20_Assignment_Address_Book
                         name = Console.ReadLine();
                     }
                     //checking for duplicate entry
-                    while (ab.UC7_CheckForDuplicateEntry(name))
+                    while (addbook.UC7_CheckForDuplicateEntry(name))
                     {
                         Console.WriteLine("This name already exists in the address book.");
                         Console.WriteLine("Please enter a new name : ");
@@ -138,16 +138,21 @@ namespace Day_20_Assignment_Address_Book
                         keyname = Console.ReadLine();
                     }
                     //storing all the data entered by the user in the constructor
-                    Contact c = new Contact(name, address, city, state, zip, contactNo, mailID);
-                    //adding the details into the method AddAddress
-                    ab.AddAddress(keyname, c);
+                    Contact contact = new Contact(name, address, city, state, zip, contactNo, mailID);
+                    //passing the details into the method AddAddress
+                    addbook.AddAddress(keyname, contact);
 
                 }
                 //second choice iteration of view all contacts
                 else if (choice == 2)
                 {
+                    Console.WriteLine("1.Sort by Name");
+                    Console.WriteLine("2.Sort by City");
+                    Console.WriteLine("3.Sort by State");
+                    Console.WriteLine("4.Sort by Zip");
+                    int input = Convert.ToInt32(Console.ReadLine());
                     //creating an object of ViewAddressBook and storing in list li
-                    List<Contact> li = ab.ViewAddressBook();
+                    List<Contact> li = addbook.ViewAddressBook(input);
                     //checking if the list is empty or not
                     if (li.Count == 0)
                     {
@@ -155,7 +160,7 @@ namespace Day_20_Assignment_Address_Book
                     }
                     else
                     {
-                        //iterating each data of the list using foreach loop
+                        //iterating each data of the contact list using foreach loop
                         foreach (Contact cl in li)
                         {
                             Console.WriteLine("Name : " + cl.GetName());
@@ -175,14 +180,14 @@ namespace Day_20_Assignment_Address_Book
                     string ename = Console.ReadLine();
                     Console.WriteLine("Enter the new number for " + ename);
                     string newnumber = Console.ReadLine();
-                    ab.EditNumber(ename, newnumber);
+                    addbook.EditNumber(ename, newnumber);
                 }
                 //iterating fourth choice to delete contact
                 else if (choice == 4)
                 {
                     Console.WriteLine("Enter the name :");
                     string rname = Console.ReadLine();
-                    ab.RemoveContact(rname);
+                    addbook.RemoveContact(rname);
                 }
                 //iterating fifth choice to view address book by a key name
                 else if (choice == 5)
@@ -190,7 +195,7 @@ namespace Day_20_Assignment_Address_Book
                     Console.WriteLine("Enter the key name : ");
                     string kname = Console.ReadLine();
                     //adding the keyname 
-                    Contact cc = ab.ViewByKeyName(kname);
+                    Contact cc = addbook.ViewByKeyName(kname);
                     if (cc == null)
                     {
                         Console.WriteLine("No such key name found!!!");
@@ -212,7 +217,7 @@ namespace Day_20_Assignment_Address_Book
                     Console.WriteLine("Enter the name of the city/state : ");
                     string location = Console.ReadLine();
                     //calling the method UC8_SearchPeopleByCityOrState() and adding the location into the list li
-                    List<Contact> li = ab.UC8_SearchPeopleByCityOrState(location);
+                    List<Contact> li = addbook.UC8_SearchPeopleByCityOrState(location);
                     //iterating the list to fetch the contact details when the list count is not empty
                     if (li.Count != 0)
                     {
@@ -230,11 +235,11 @@ namespace Day_20_Assignment_Address_Book
                 //UC9- View persons by city or state
                 else if (choice == 7)
                 {
-                    ab.AddressByCity();
+                    addbook.AddressByCity();
                 }
                 else if (choice == 8)
                 {
-                    ab.AddressByState();
+                    addbook.AddressByState();
                 }
                 else
                 {

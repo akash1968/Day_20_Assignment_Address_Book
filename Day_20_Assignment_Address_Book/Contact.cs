@@ -66,6 +66,6 @@ namespace Day_20_Assignment_Address_Book
         {
             return email;
         }
-        public bool Count { get; internal set; }
+       
     }
 }
