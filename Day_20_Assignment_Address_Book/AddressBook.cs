@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AddressBook.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
@@ -238,6 +238,7 @@ namespace Day_20_Assignment_Address_Book
              // Reading all lines from the file
            string lines = File.ReadAllText(path);
             Console.WriteLine(lines);
-        }
+      
+        }  
     }
 }
